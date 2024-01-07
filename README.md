@@ -1,0 +1,1 @@
+# SC1000i-greatest-common-divisor-
