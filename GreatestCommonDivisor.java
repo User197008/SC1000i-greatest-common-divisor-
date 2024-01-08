@@ -7,12 +7,9 @@ import java.util.List;
  * @author Jaime Jose Goga Nakayoshi
  */
 public class GCD {
-    
-    
-    
     public static String GCD(String cadena) {
         try {
-            ArrayList<String> Lista = MiniLibrary.split(cadena);
+            ArrayList<String> Lista = split(cadena);
             ArrayList<Integer> num = new ArrayList<>();
             for(String d : Lista)    {
                 Integer m = Integer.valueOf(d);
@@ -47,32 +44,8 @@ public class GCD {
             return "Error: Only Integer";
         }
     }
-    public static  String mediana(String cadena) {
-        try {
-            double me = 0;
-            ArrayList<String> Lista = MiniLibrary.split(cadena);
-            ArrayList<Double> Lista2 = new ArrayList<>();
-            for (String i:Lista)    {
-                Lista2.add(Double.parseDouble(i));
-            }
-            Collections.sort(Lista2);
-            int lon = Lista.size();
-            if(lon % 2 == 0) {
-                int n1 = lon/2 - 1;
-                int n2 = lon/2;
-                me = (Lista2.get(n1) + Lista2.get(n2))/2;
-            }
-            else if (lon % 2 != 0) {
-                int n = lon/2;
-                me = Lista2.get(n);
-            }
-            return String.valueOf(me);
-        }catch (Exception e){
-            return "Error Syntax : Only numbers ";
-        }
-    }
     
-   
+  
     
     public  static void numerosprimos(int n, int count, List<List<Integer>> pri )  {
         for(int i=1; i< n+1; i++)   {
@@ -116,7 +89,7 @@ public class GCD {
             }
         }
         for(int f=0; f < new_fac.size(); f++)   {
-            MiniLibrary.uniqueOrdenado(new_fac.get(f));
+            uniqueOrdenado(new_fac.get(f));
         }
     }
     public  static void contar( List<List<Integer>> fac, List<List<Integer>> new_fac, List<List<Integer>> conteo)    {
@@ -149,7 +122,7 @@ public class GCD {
         List<Integer> factorcomun = new ArrayList<>();
         List<Integer> expo2 = new ArrayList<>();
         Integer p = Collections.max(num);
-        List<List<Integer>> uni = MiniLibrary.zip(factor2,exponen);
+        List<List<Integer>> uni = zip(factor2,exponen);
         int c = 0;
         for(int i = 1; i < p+1; i++)    {
             coe.add(new ArrayList<Integer>());
@@ -165,7 +138,7 @@ public class GCD {
                 coe2.add(j);
             }
         }
-        List<Integer> new_factor = MiniLibrary.uniqueOrdenado(factor2);
+        List<Integer> new_factor = uniqueOrdenado(factor2);
         Collections.sort(new_factor);
         for(int h=0; h<coe2.size(); h++) {
             if(coe2.get(h).size()==num.size())  {
@@ -195,7 +168,7 @@ public class GCD {
         List<List<Integer>> coe2 = new ArrayList<>();
         ArrayList<Integer> expo = new ArrayList<>();
         Integer p = Collections.max(num);
-        List<List<Integer>> uni = MiniLibrary.zip(factor2,exponen);
+        List<List<Integer>> uni = zip(factor2,exponen);
         int c = 0;
         for(int i = 1; i < p+1; i++)    {
             coe.add(new ArrayList<Integer>());
@@ -217,7 +190,7 @@ public class GCD {
             Integer m = Collections.max(k);
             expo.add(m);
         }
-        List<Integer> new_factor = MiniLibrary.uniqueOrdenado(factor2);
+        List<Integer> new_factor = uniqueOrdenado(factor2);
         Collections.sort(new_factor);
         ArrayList<Integer> pow = new ArrayList<>();
         for (int i = 0; i < new_factor.size(); i++) {
@@ -234,6 +207,46 @@ public class GCD {
         return LMCM;
     }
     
+    public static ArrayList<String> split(String cadena)  {
+
+        List<String> myList = new ArrayList<>(Arrays.asList(cadena.split(" ")));
+        ArrayList<String> Lista = new ArrayList<>();
+        for (int i=0;i<=myList.size()-1;i++) {
+            String x = myList.get(i);
+
+            if (!"".equals(x)) {
+                Lista.add(x);
+            }
+        }
+        return Lista;
+
+    }
+    
+    public static List<Integer> uniqueOrdenado(List<Integer> lista){        
+        Set<Integer> s = new LinkedHashSet<>(lista);                        
+        lista.clear();
+        lista.addAll(s);
+        return lista;
+    
+    }   
+    public static <T> List<List<T>> zip(List<T>... lists) {
+        List<List<T>> zipped = new ArrayList<>();
+        for (List<T> list : lists) {
+            for (int i = 0, listSize = list.size(); i < listSize; i++) {
+                List<T> list2;
+                if (i >= zipped.size())
+                    zipped.add(list2 = new ArrayList<>());
+
+                else
+                    list2 = zipped.get(i);
+                list2.add(list.get(i));
+
+            }
+        }
+        return zipped;
+    }
+    
+     
      public static void main(String[] args) {
         String cadena = "100 234 432 321 561";
         
